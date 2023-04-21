@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!-- jQuery 기본
+    1. jQuery 개요
+        - 모든 브라우저에서 동작하는 클라이언트 자바스크립트 라이브러리.
+        - 다음의 기능을 위해 제작
+            · DOM 과 관련된 처리를 쉽게 구현
+            · 일관된 이벤트 연결을 쉽게 구현
+            · 시각적 효과를 쉽게 구현
+            · ajax 애플리케이션을 쉽게 구현
+        - http://jquery.com
+        - jQuery 사용 방법
+            1) 직접 다운받아 사용하는 방법.
+            2) CDN 호스트 사용하는 방법.
+                · Content Delivery Network
+                · 사용자에게 간편하게 콘텐츠를 제공하는 방식을 의미
+                · 구글, 마이크로소프트, jQuery측에서 사용자가 jQuery 를 사용하기 편하게 콘첸트를 제공.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_JQuery_Basic01.html</title>
+<!--
+1. JQuery 라이브러리 다운받아 포함하는 방법 : 2가지 방식
+    방법1 링크 연결
+    <script src="https://code.jquery.com/jquery.3.6.4.js"></script>
+    -->
+
+    <!-- 방법2 직접 다운로드하여 저장하고, SCRIPT 태그에 위치를 지정 -->
+    <script src="script/jquery-3.6.4.js"></script>
+
+    <!-- script 태그는 갯수와 상관없이 추가가 가능합니다. 여러 개 써도됨. 함수를 만들어서 가져와서 쓰이는 경우 -->
+    <!-- css 파일처럼 분리해서 사용이 가능합니다. -->
+    <!-- JQuery 라이브러리는 다운받아서 script 태그로 연결 지정하고, 실제 JQuery 코드는 일반 자바스크립트 코드와 같은 영역에 작성합니다. -->
+    <script type="text/javascript">
+        // JQuery는 자바스크립트 라이브러리이므로, JQuery 명령 또는 자바스크립트 영역에 기술됩니다.
+
+        // 2. JQuery를 사용한 웹페이지 형식
+        // JQuery는 자바스크립트의 확장판이기때문에 작성 영역이 script 태그 내부로 똑같습니다.
+        // 이 영역에 자바스크립트와 JQuery를 섞어서 사용해도 무관합니다...
+
+        // 작성영역은 똑같지만, 작성된 내용의 시작이 다소 차이가 좀 납니다.
+        // 쉽게 말해서 "이 명령들(이 코드들)은 JQuery 명령입니다"라는 영역 표시가 필요합니다.
+        // $( document ).ready(function(){});
+        // 명령실행 대상은 document 이고, 그 대상객체의 멤버메서드 중 read() 라는 메서드를 사용합니다.
+
+        $( document ).ready( function(){} );
+        // 실행될 명령의 대상은 document 이고, ready 라는 메서드가 실행되서 document 가 준비가 완료되면,
+        // function(){} 에 있는 실제 명령을 실행하라는 뜻입니다.
+
+        // 정식의 JQuery 명령 형식
+        $( document ).ready( function(){/* 명령1; 명령2; */ } );
+        $( document ).ready( function(){
+            // 명령1;
+            // 명령2;
+        } );
+        // 모든 명령은 익명함수 안에 넣어서 작성하고,
+        // $( document ).ready( function(){} ); 는 여러번 쓸 수 있습니다.
+
+        // 그 안에 넣지 않은 명령은 JQuery로 인식되지 않고, 자바스크립트 언어로 인식됩니다.
+        // 따라서 일부 명령은 자바스크립트 문법으로 실행이 되지 않는 코드가 있을 수 있습니다.
+        // 그 명령이 JQuery에만 있는 함수나 명령이라면 실행이 안되거나 오류를 발생합니다.
+
+        // 위에 쓰인 JQuery 영역의 표식은 구문이 길어서 대개는 아래와 같이 간략하게 사용하는 것이 대부분입니다.
+        // 앞으로 위 구문은 아래와 같이 document 와 ready 를 생략한 후 간결하게 사용합니다.
+        // $(document).ready(function(){}) 에서 (document).ready 를 생략 --> $(function(){   });
+        $( function(){ } );
+        // 같은 표현 $( document ).ready( function(){ } );
+
+        // id가 "tit"인 태그에 글자색을 빨간색으로 변경하세요
+        // 잘못된 예
+        // $("#tit").css('color', 'red');
+
+        // 올바른 예
+        $( function(){
+            $("#tit").css('color','red');
+        });
+        // 사용 문법은 자바스크립트에서 썼던 문법 모두 다 사용이 가능하고, 추가로 JQuery문법을 사용하는 형식입니다.
+
+        // JQuery의 일반적 명령형식
+        // $( 명령대상 ).사용가능한함수();
+        $(function(){
+            $("body").css("background-color", "#00FFFF");
+            // 선택자로 대상 선택$("body") -> 스타일 또는 구성요소 또는 함수 선택 .css()
+            // -> 변경 내용 지정("background-color","#00FFFF");
+            // $(선택자).구성요소 또는 메서드( 변경내용 );
+        })
+
+        // 1) 전체 선택자(*)
+        $(function (){
+            $("*").css("border", "1px solid blue");
+            // .css 안에 스타일요소명과 적용할 값을 따옴표 묶어서 위와 같이 넣으면, 해당 선택자에서 지목한 태그에 적용됩니다.
+        })
+
+        // 2) 태그 선택자
+        $(function(){
+            $("h3").css("background-color", "#FF00FF");
+        });
+
+        // 3) 아이디 선택자
+        $(function(){
+            $("#tit").css("background-color", "#ff0").css("broder", "2px solid #f00").css("font-size", "250%");
+            // $("#tit").css("background-color", "#ff0");
+            // $("#tit").css("border", "2px solid #f00");
+            // $("#tit").css("font-size", "250%");
+        }); // 여러 항목을 체이닝 방식으로 한번에 지정하기도 합니다.
+
+        // 3) 클래스 선택자
+        $(function(){
+            $(".tit2").css("background-color", "#ff0").css("border", "2px dashed black");
+        });
+
+        // 두 개 이상의 태그 선택
+        $(function(){
+            $('h1', 'h2').css("background-color", "#DDDDDD").css("border","2px dashed #00f");
+        });
+
+        // 종속 선택자
+        $(function(){
+            $("h1.tit2").css("color", "yellow");
+            // $("h1 .tit2") 후손선택자 : h1태그의 훈수 중 클래스가 tit2 인 것
+            // $("h1.tit2") 종속선택자 : h1 태그들 중 클래스가 tit2 인 것
+        });
+    </script>
+</head>
+<body>
+    <h1 id="tit">제목</h1>
+    <h1>JQuery</h1>
+    <h2>선택자</h2>
+    <h3>직접 선택자</h3>
+    <h1 class="tit2">제목</h1>
+</body>
+</html>

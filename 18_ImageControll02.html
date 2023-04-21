@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>18_ImageControll02.html</title>
+<script src="script/jquery-3.6.4.js"></script>
+<script type="text/javascript">
+    // 이미지를 클릭할 때마다 1->2 2->3 .... 10이미지까지 변경되도록 코딩하세요
+    // 10번이미지에 다다랐을때 다시 1번으로 다시시작합니다.
+    // $(function(){
+    //     var imgNum=0;
+    //     $('img').click(function(){
+    //         imgNum++;
+    //         if(imgNum>10) imgNum=1;
+    //         $('img').attr('src', 'images/'+imgNum+'.jpg');
+    //     });
+    // })
+
+    // setInterval 을 이용해서 1초에 하나씩 변경되도록
+    // $(function(){
+    //     var imgNum=0;
+    //     setInterval(function(){
+    //         imgNum++;
+    //         if(imgNum>10) imgNum = 1;
+    //         $('img').attr('src', 'images/' + imgNum + '.jpg');
+    //     }, 1000);
+    // });
+
+    // 1초에 한번씩 이미지가 변경되도록 하고, 마우스가 이미지에 올라가면 변경 멈춤
+    // 마우스가 다시 빠져나가면 변경 다시 시작
+    $(function(){
+        var imgNum = 0;
+        var timer;
+        $('img').hover(
+            function(){  // mouseenter
+                window.clearInterval(timer);
+            },
+            function(){  // mouseleave
+                timer = setInterval(function(){
+                    imgNum++;
+                    if(imgNum>10) imgNum=1;
+                    $('img').attr('src', 'images/' + imgNum + '.jpg');
+                }, 1000);
+            }
+        )
+        $('img').trigger('mouseleave');  // 강제로 mouseleave 익명 함수 시작.
+    });
+</script>
+</head>
+<body>
+    <img src="images/1.jpg"/>
+</body>
+</html>

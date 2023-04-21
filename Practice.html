@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        #view{position:relative; width:600px; height:400px; margin:0 auto; border:1px dashed black;
+        overflow:hidden;}
+        #imgs{position:absolute; left:0; top:0; width:4800px; height:400px; float:left;}
+        img{width:600px; height:400px;}
+        #selects{position:relative; margin:0 auto; top:350px; width:450px; height:50px; border:1px solid red; text-align:center;}
+        ul{list-style:none; padding:0; margin:0; height:40px; display:inline-block;}
+        li{float:left; width:25px; height:25px; background:white; color:black; font-weight:bold; font-size:120%; border-radius:50%; overflow:hidden; text-align:center; margin:15px 4px;}
+    </style>
+    <script src="script/jquery-3.6.4.js"></script>
+    <script type="text/javascript">
+        var imgNum=0;
+        var timer;
+        var isMove=false;
+        var isClickNum;
+        $(function(){
+            $('li').click(function(){
+                isClickNum = $(this).index();
+                if(isClickNum == 0){
+                    if(isMove == true) return;
+                    if(imgNum == 0) return;
+                    imgNum--;
+                    var dist = imgNum * -600;
+                    $('#imgs').animate({left:dist}, 300);
+                }else if(isClickNum == 9){
+                    if(isMove == true) return;
+                    if(imgNum == 7) return;
+                    imgNum++;
+                    var dist = imgNum * -600;
+                    $('#imgs').animate({left:dist}, 300);
+                }else if(isClickNum == 10){
+                    if(isMove == false){
+                        isMove = true;
+                    timer = setInterval(function(){
+                        imgNum++;
+                        if(imgNum > 7) imgNum=0;
+                        var dist = imgNum * -600;
+                        $('#imgs').animate({left:dist}, 300);
+                    }, 1000);
+                    }else{
+                        isMove = false;
+                        window.clearInterval(timer);
+                        $(this).html(12);
+                    }
+                }else{
+                    if(isMove == true) return;
+                    imgNum = $(this).index()-1;
+                    var dist = imgNum * -600;
+                    $('#imgs').animate({left:dist}, 300);
+                }
+            });
+            
+        })
+    </script>
+</head>
+<body>
+    <div id="view">
+        <div id="imgs">
+            <img src="images/Koala.jpg"/><img src="images/Chrysanthemum.jpg"/><img src="images/Desert.jpg"/><img src="images/Hydrangeas.jpg"/><img src="images/Jellyfish.jpg"/><img src="images/Lighthouse.jpg"/><img src="images/Penguins.jpg"/><img src="images/Tulips.jpg"/>
+        </div>
+        <div id="selects">
+            <ul>
+                <li>0</li>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li>6</li>
+                <li>7</li>
+                <li>8</li>
+                <li>9</li>
+                <li>10</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
